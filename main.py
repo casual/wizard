@@ -4,7 +4,7 @@ import streamlit as st
 
 
 
-BASE_API_URL = "http://127.0.0.1:7860"
+BASE_API_URL = "https://diegomyv-wizard.hf.space"
 FLOW_ID = "198e58f4-b2dd-4d3a-b463-80039ba8f1de"
 ENDPOINT = "wizard" # You can set a specific endpoint name in the flow settings
 
