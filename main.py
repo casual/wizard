@@ -10,14 +10,7 @@ ENDPOINT = "wizard" # You can set a specific endpoint name in the flow settings
 TOKEN = "AstraCS:JlSEGDZksqLkYbzhjiSHWOmr:67506729d01cfc0957a4fea927ad1cfbfae45400f0eb5e9378cacc9483a38101"
 
 def run_flow(game_name: str, game_description: str, game_references: str) -> dict:
-    """
-    Run a flow with a given message and optional tweaks.
 
-    :param message: The message to send to the flow
-    :param endpoint: The ID or the endpoint name of the flow
-    :param tweaks: Optional tweaks to customize the flow
-    :return: The JSON response from the flow
-    """
     #api_url = f"{BASE_API_URL}/api/v1/run/{ENDPOINT}"
 
     api_url = f"{BASE_API_URL}/lf/{FLOW_ID}/api/v1/run/{ENDPOINT}"
