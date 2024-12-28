@@ -4,9 +4,10 @@ import streamlit as st
 
 
 
-BASE_API_URL = "https://diegomyv-wizard.hf.space"
-FLOW_ID = "198e58f4-b2dd-4d3a-b463-80039ba8f1de"
+BASE_API_URL = "https://api.langflow.astra.datastax.com"
+FLOW_ID = "fed03fc4-54ff-4cd1-922d-5fa4be09bb33"
 ENDPOINT = "wizard" # You can set a specific endpoint name in the flow settings
+TOKEN = "AstraCS:JlSEGDZksqLkYbzhjiSHWOmr:67506729d01cfc0957a4fea927ad1cfbfae45400f0eb5e9378cacc9483a38101"
 
 def run_flow(game_name: str, game_description: str, game_references: str) -> dict:
     """
@@ -17,7 +18,9 @@ def run_flow(game_name: str, game_description: str, game_references: str) -> dic
     :param tweaks: Optional tweaks to customize the flow
     :return: The JSON response from the flow
     """
-    api_url = f"{BASE_API_URL}/api/v1/run/{ENDPOINT}"
+    #api_url = f"{BASE_API_URL}/api/v1/run/{ENDPOINT}"
+
+    api_url = f"{BASE_API_URL}/lf/{FLOW_ID}/api/v1/run/{ENDPOINT}"
 
     prompt = "Mi juego se llama " + game_name + ". El juego se trata sobre " + game_description + ". Toma como referencia los siguientes juegos para buscar en tu base de datos: " + game_references
 
@@ -26,7 +29,7 @@ def run_flow(game_name: str, game_description: str, game_references: str) -> dic
         "output_type": "chat",
         "input_type": "chat",
     }
-    headers = None
+    headers = {"Authorization": "Bearer " + TOKEN, "Content-Type": "application/json"}
     response = requests.post(api_url, json=payload, headers=headers)
     return response.json()
 
@@ -50,8 +53,11 @@ def main():
         if not references.strip():
             references = "no ocupes otras referencias"
         try:
-            with st.spinner("Haciendo magia..."):
+            with st.spinner("Preparando magia..."):
                 response = run_flow(name, description, references)
+
+            #st.markdown(response)
+            #st.title("respuesta final")
 
             response = response["outputs"][0]["outputs"][0]["results"]["message"]["text"]
             st.markdown(response)
