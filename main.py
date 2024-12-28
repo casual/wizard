@@ -50,7 +50,7 @@ def main():
         if not references.strip():
             references = "no ocupes otras referencias"
         try:
-            with st.spinner("Preparando magia..."):
+            with st.spinner("Haciendo magia..."):
                 response = run_flow(name, description, references)
 
             response = response["outputs"][0]["outputs"][0]["results"]["message"]["text"]
