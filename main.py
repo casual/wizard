@@ -47,6 +47,8 @@ def main():
         if not description.strip():
             st.error("Ingresa el nombre")
             return
+        if not references.strip():
+            references = "no ocupes otras referencias"
         try:
             with st.spinner("Preparando magia..."):
                 response = run_flow(name, description, references)
